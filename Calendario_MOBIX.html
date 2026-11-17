@@ -1,0 +1,166 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MOBIX | Turnos</title><style>*{box-sizing:border-box}body{background:#000;color:#fff;font:16px Arial;margin:0}main{max-width:1000px;margin:auto;padding:18px}h1{font-size:25px}b{color:#42dcd7}.bar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin:20px 0}button:disabled{opacity:.35;cursor:not-allowed}button{padding:10px 14px;border:1px solid #36656b;background:#101a1e;color:white;border-radius:8px;cursor:pointer}.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.day{min-height:105px;background:#0c1115;border:1px solid #344149;border-radius:8px;padding:7px;cursor:pointer}.empty{background:none;border:0}.day.holiday{border:2px solid #e54848;background:#220b0d}.holiday-label{display:block;background:#c62828;color:#fff;border-radius:5px;padding:5px 4px;margin:5px 0;font-size:11px;font-weight:bold;line-height:1.25}.holiday-label.irrenunciable{background:#a41414}.week{text-align:center;color:#a8bec4;padding:10px 0}.tag{display:block;border-radius:5px;padding:5px;margin:4px 0;color:#071115;font-size:12px;font-weight:bold}.pink{background:#f6a2cc}.blue{background:#65b9f4}.purple{background:#c7a0fa}.legend{display:flex;gap:10px;flex-wrap:wrap}.legend span{padding:9px;border-radius:7px;color:#111;font-weight:bold}.muted{color:#a9b6be;font-size:13px}.modal{display:none;position:fixed;inset:0;background:#000c;align-items:center;justify-content:center;padding:15px}.modal.open{display:flex}.panel{background:#101719;border:1px solid #43dcd7;border-radius:14px;padding:22px;width:min(400px,100%)}label{display:block;padding:13px;margin:9px 0;color:#111;border-radius:7px;font-weight:bold}input[type=checkbox]{width:20px;height:20px;vertical-align:middle}#save,#saveCalendar{background:#43dcd7;color:#001515;font-weight:bold}@media(max-width:600px){main{padding:9px}h1{font-size:21px}.calendar{gap:3px}.day{min-height:80px;padding:4px}.holiday-label{font-size:9px;padding:3px 2px;overflow-wrap:anywhere}.tag{font-size:10px;padding:3px 2px}.week{font-size:11px}}@media print{body{background:white;color:black}button,.muted{display:none}.day{background:white}.tag,.holiday-label,.day.holiday{print-color-adjust:exact;-webkit-print-color-adjust:exact}}.author-credit{display:flex;align-items:center;justify-content:center;gap:15px;margin:26px 0 8px;color:#fff;font-size:14px}.author-credit svg{width:250px;max-width:50%;height:40px}@media(max-width:420px){.author-credit{gap:8px;font-size:12px}.author-credit svg{max-width:48%}}@media print{.author-credit{color:#000}}</style><style id="mobixPulseV105">
+/* V100: pulso compacto exclusivamente en el rectángulo indicado, sin ocupar la barra completa. */
+@media screen and (min-width:701px){
+ header{position:relative;grid-template-columns:minmax(0,1fr) auto!important;column-gap:22px!important}
+ header h1,header>p{grid-column:1!important}
+ header>.order-stopwatch{grid-column:2!important;grid-row:1 / 3!important}
+ /* Solo en el pequeño espacio marcado, debajo del título. */
+ header>.mobix-heartbeat{position:absolute;left:225px;top:53px;width:245px;height:41px;margin:0;z-index:1}
+}
+@media screen{
+ .mobix-heartbeat{height:82px;position:relative;overflow:hidden;pointer-events:none;min-width:0}
+ .mobix-heartbeat svg{width:100%;height:100%;display:block;overflow:hidden}
+ .mobix-heartbeat .pulse-color{fill:none;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1000;stroke-dashoffset:1000;animation-duration:30s;animation-timing-function:linear;animation-iteration-count:infinite}
+ .mobix-heartbeat .pulse-blue{stroke:#65dcff;filter:drop-shadow(0 0 3px #00cfff) drop-shadow(0 0 8px #008dff);animation-name:mobixBlueCycle}
+ .mobix-heartbeat .pulse-purple{stroke:#d98bff;filter:drop-shadow(0 0 3px #b03bff) drop-shadow(0 0 8px #8d21ed);animation-name:mobixPurpleCycle}
+ .mobix-heartbeat .pulse-green{stroke:#54ff92;filter:drop-shadow(0 0 3px #22ee77) drop-shadow(0 0 8px #00aa55);animation-name:mobixGreenCycle}
+ .mobix-heartbeat .pulse-yellow{stroke:#ffe35a;filter:drop-shadow(0 0 3px #ffdb00) drop-shadow(0 0 8px #b38b00);animation-name:mobixYellowCycle}
+ .mobix-heartbeat .pulse-red{stroke:#ff626c;filter:drop-shadow(0 0 3px #ff3149) drop-shadow(0 0 8px #c8002c);animation-name:mobixRedCycle}
+ /* V108: misma separación ampliada en todas las transiciones de color. */
+  /* V105: al cambiar de color, el anterior se borra ligeramente por delante
+    del nuevo trazo, dejando una separación visible que avanza con el pulso. */
+ @keyframes mobixBlueCycle{0%,1.8%{stroke-dashoffset:1000}20%{stroke-dashoffset:0}40%{stroke-dashoffset:-1000}40.01%,100%{stroke-dashoffset:1000}}
+ @keyframes mobixPurpleCycle{0%,21.8%{stroke-dashoffset:1000}40%{stroke-dashoffset:0}40.01%{stroke-dashoffset:0}60%{stroke-dashoffset:-1000}60.01%,100%{stroke-dashoffset:1000}}
+ @keyframes mobixGreenCycle{0%,41.8%{stroke-dashoffset:1000}60%{stroke-dashoffset:0}60.01%{stroke-dashoffset:0}80%{stroke-dashoffset:-1000}80.01%,100%{stroke-dashoffset:1000}}
+ @keyframes mobixYellowCycle{0%,61.8%{stroke-dashoffset:1000}80%{stroke-dashoffset:0}80.01%{stroke-dashoffset:0}100%{stroke-dashoffset:-1000}}
+ @keyframes mobixRedCycle{0%{stroke-dashoffset:0}18.6%{stroke-dashoffset:-1000}18.61%,81.8%{stroke-dashoffset:1000}100%{stroke-dashoffset:0}}
+}
+@media screen and (max-width:700px){header>.mobix-heartbeat{width:min(245px,100%);height:41px;margin:8px 0 0}}
+@media (prefers-reduced-motion:reduce){.mobix-heartbeat .pulse-color{animation:none;stroke-dashoffset:1000}.mobix-heartbeat .pulse-blue{stroke-dashoffset:0}}
+@media print{.mobix-heartbeat{display:none!important}}
+</style><style>
+.mobix-top{background:#131925;border-bottom:1px solid #334;padding:18px 24px;margin-bottom:18px}
+.mobix-top h1{margin:0 0 4px;font-size:29px}
+.mobix-byline{display:flex;align-items:center;gap:15px;flex-wrap:wrap;font-size:14px}
+.mobix-top .mobix-heartbeat{position:relative!important;left:auto!important;top:auto!important;width:245px!important;height:41px!important;margin:0!important;flex:0 0 245px}
+@media(max-width:600px){.mobix-top{padding:15px 12px}.mobix-top h1{font-size:23px}.mobix-byline{gap:8px}.mobix-top .mobix-heartbeat{width:170px!important;flex-basis:170px;height:32px!important}}
+@media print{.mobix-top{background:#fff;color:#000}}
+</style>
+<style id="mobixClockV10">
+.mobix-top{position:relative;padding-right:260px!important;min-height:112px}
+.mobix-clock{position:absolute;right:16px;top:50%;transform:translateY(-50%);border:1px solid #36656b;background:#07151a;border-radius:11px;padding:12px 17px;min-width:210px;text-align:center}
+.mobix-clock-label{font-size:12px;font-weight:bold;color:#a9c4d3;margin-bottom:5px}
+.mobix-clock-date{font-size:13px;font-weight:650;color:#c2d9e4;margin-top:4px;font-variant-numeric:tabular-nums}
+.mobix-clock-time{font-size:29px;font-weight:800;letter-spacing:1px;font-variant-numeric:tabular-nums;color:#43dfd9}
+@media(max-width:700px){.mobix-top{padding-right:12px!important}.mobix-clock{position:static;transform:none;margin-top:12px;width:fit-content;min-width:200px;text-align:left}}
+@media print{.mobix-clock{display:none!important}}
+
+/* Reloj de hojas abatibles */
+.mobix-clock{min-width:290px!important;padding:12px 14px!important}
+.mobix-clock-time{display:flex;align-items:center;justify-content:center;gap:3px;letter-spacing:0!important;color:#e9f7fa!important;font-family:Arial,sans-serif}
+.flip-digit{position:relative;display:inline-grid;place-items:center;width:31px;height:43px;border-radius:5px;background:linear-gradient(#202831 0 49%,#111920 50% 100%);box-shadow:0 3px 6px #0009,inset 0 1px #53616b;perspective:200px;overflow:hidden;color:#f3f8fa;font-size:29px;font-weight:800;line-height:1}
+.flip-digit:after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:#050a0e;z-index:4;pointer-events:none}
+.flip-digit .flip-old{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(#202831 0 49%,#111920 50% 100%);transform-origin:center top;backface-visibility:hidden;z-index:3}
+.flip-digit.flipping .flip-old{animation:mobix-flip-up .42s ease-in forwards}
+@keyframes mobix-flip-up{0%{transform:rotateX(0deg);opacity:1}100%{transform:rotateX(-90deg);opacity:0}}
+.flip-colon{font-size:26px;color:#43dfd9;font-weight:800;margin:0 1px}
+@media(max-width:700px){.mobix-clock{min-width:0!important;max-width:100%;box-sizing:border-box}.flip-digit{width:27px;height:39px;font-size:25px}}
+@media(prefers-reduced-motion:reduce){.flip-digit.flipping .flip-old{animation:none}}
+/* V13: reloj mecánico negro, números blancos y contorno azul */
+.mobix-clock{background:#141b28!important;border:2px solid #398bdb!important;box-shadow:0 3px 12px #0007!important}
+.mobix-clock-time{color:#ffffff!important}
+.flip-digit,.flip-digit .flip-old{background:linear-gradient(to bottom,#080808 0%,#050505 49%,#000000 50%,#090909 100%)!important;color:#ffffff!important}
+.flip-digit{box-shadow:0 3px 6px #000b,inset 0 1px #333!important}
+.flip-digit:after{background:#252525!important}
+.flip-digit .flip-value{color:#ffffff!important}
+.flip-colon{color:#ffffff!important}
+
+</style>
+<style id="mobix-v14-clock-polish">.mobix-clock{background:#344A61!important;border:2px solid #398BDB!important}.flip-digit,.flip-digit .flip-old{background:#050505!important;color:#fff!important}.flip-digit:after{background:#262626!important;height:1px!important;z-index:1!important;opacity:.55!important}.flip-digit .flip-value{position:relative;z-index:2;display:grid;place-items:center;width:100%;height:100%;color:#fff!important;text-shadow:0 1px 1px #000}.flip-digit .flip-old{z-index:3!important;display:grid;place-items:center;text-shadow:0 1px 1px #000}.flip-colon,.mobix-clock-label,.mobix-clock-date{color:#fff!important}</style><style id="mobix-v15-digital-clock">
+/* Reloj digital limpio, sin fichas ni líneas del mecanismo flip */
+.mobix-clock{background:#000000!important;border:2px solid #398BDB!important}
+.mobix-clock-time{display:block!important;color:#FFFFFF!important;font-family:Arial,Helvetica,sans-serif!important;font-size:31px!important;font-weight:800!important;letter-spacing:2px!important;line-height:1.35!important;font-variant-numeric:tabular-nums!important;text-shadow:none!important;white-space:nowrap}
+.mobix-clock-label,.mobix-clock-date{color:#FFFFFF!important}
+@media(max-width:700px){.mobix-clock-time{font-size:27px!important}}
+</style><style id="mobix-v17-absolute-black">
+/* Fondos generales negros; las casillas del calendario conservan su diseño */
+html,body,main,.mobix-top,.panel,.modal,.bar{background-color:#000!important}
+button:not(#save):not(#saveCalendar){background:#000!important}
+/* Se mantienen los bordes originales y el fondo negro del reloj */
+.mobix-clock{background:#000!important}
+/* No alterar .day, .day.holiday, .tag ni las etiquetas de trabajadoras */
+@media print{body,main,.mobix-top,.panel{background:#fff!important}}
+</style>
+<style id="mobix-v18-one-page-print">
+@media print {
+  @page { size: A4 portrait; margin: 10mm; }
+  html,body { width:100%!important; margin:0!important; padding:0!important; background:#fff!important; color:#000!important; }
+  main { max-width:none!important; width:100%!important; margin:0!important; padding:0!important; background:#fff!important; }
+  .mobix-top,.legend,main>p,.bar:not(:has(#title)),#status,.author-credit,.mobix-heartbeat,.modal { display:none!important; }
+  .bar:has(#title) { display:flex!important; justify-content:center!important; margin:0 0 8mm!important; padding:0!important; background:#fff!important; }
+  .bar:has(#title) button {display:none!important}
+  #title { font-size:19px!important; margin:0!important; color:#000!important; }
+  .calendar { display:grid!important; grid-template-columns:repeat(7,minmax(0,1fr))!important; gap:3px!important; width:100%!important; }
+  .week {font-size:11px!important; padding:5px 0!important; color:#526170!important;}
+  .day {height:32mm!important; min-height:0!important; padding:4px!important; border:1px solid #56616b!important; border-radius:5px!important; background:#fff!important; color:#000!important; break-inside:avoid!important; page-break-inside:avoid!important; overflow:hidden!important;}
+  .day.holiday {border:2px solid #d32835!important; background:#fff!important;}
+  .day.empty {border:0!important; background:transparent!important;}
+  .tag {font-size:10px!important; line-height:1.2!important; padding:3px!important; margin:3px 0!important; -webkit-print-color-adjust:exact!important; print-color-adjust:exact!important;}
+  .calendar,main {break-inside:avoid!important;page-break-inside:avoid!important;}
+}
+</style>
+<style id="mobix-signature-v20">
+.mobix-author{display:inline-flex;align-items:baseline;gap:6px;white-space:nowrap}
+.mobix-signature{display:inline-block;position:relative;overflow:hidden;white-space:nowrap;vertical-align:baseline;font-family:"Segoe Script","Brush Script MT","Lucida Handwriting",cursive;font-style:italic;font-size:21px;font-weight:600;line-height:1.35;color:#fff;max-width:0;animation:mobixWriteSignature 3.2s steps(28,end) .35s forwards}
+.mobix-signature::after{content:"";position:absolute;right:0;top:12%;height:75%;border-right:2px solid #69dfff;animation:mobixPenBlink .5s step-end 7, mobixPenHide .1s linear 3.6s forwards}
+@keyframes mobixWriteSignature{to{max-width:220px}}
+@keyframes mobixPenBlink{50%{opacity:0}}
+@keyframes mobixPenHide{to{opacity:0}}
+@media(max-width:600px){.mobix-signature{font-size:18px}@keyframes mobixWriteSignature{to{max-width:195px}}}
+@media print{.mobix-signature{max-width:none!important;animation:none!important}.mobix-signature::after{display:none!important}}
+@media(prefers-reduced-motion:reduce){.mobix-signature{max-width:none;animation:none}.mobix-signature::after{display:none}}
+</style><main><header class="mobix-top"><h1>MOB<b>IX</b> | Calendario de turnos</h1><div class="mobix-byline"><span class="mobix-author">Creado por <span class="mobix-signature">Eduardo Baeza</span></span></div><div class="mobix-clock" role="timer" aria-label="Hora actual de Chile"><div class="mobix-clock-label">◷ Hora actual · Chile</div><div class="mobix-clock-time" id="mobixCurrentTime">--:--:--</div><div class="mobix-clock-date" id="mobixCurrentDate">--/--/----</div></div></header><div class="legend"><span class="purple">Camila F</span><span class="pink">Yariza</span><span class="blue">Camila M</span></div><p class="muted">Los feriados nacionales de Chile (2026 y 2027) se destacan en rojo. Los turnos siguen siendo editables.</p><div class="bar"><button id="auth">Ingresar como administrador</button><span id="mode" class="muted">Solo lectura</span></div><div class="bar"><button id="prev">‹ Anterior</button><h2 id="title"></h2><button id="next">Siguiente ›</button></div><div id="calendar" class="calendar"></div><p class="muted">Para modificar turnos, entra al modo administrador. Los turnos se consultan desde Calendario_MOBIX.json en GitHub. Para guardar en línea se requiere configurar el servidor seguro.</p><div class="bar"><button id="saveCalendar">Guardar calendario</button><button id="export">Exportar respaldo</button><button id="import">Importar respaldo</button><button onclick="print()">Imprimir</button><input id="file" type="file" accept=".json" hidden></div><p class="muted" id="status"></p></main><div id="modal" class="modal"><div class="panel"><h3 id="date"></h3><label class="purple"><input id="camilaF" type="checkbox"> Camila F</label><label class="pink"><input id="yarisa" type="checkbox"> Yariza</label><label class="blue"><input id="camila" type="checkbox"> Camila M</label><div class="bar"><button id="cancel">Cancelar</button><button id="save">Guardar</button></div></div></div><script>const KEY='mobix_calendario_turnos_v1';let data={};try{data=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch{}let year=2026,month=10,day=0,admin=false;const ADMIN_PASSWORD='17-24';let SYNC_API=localStorage.getItem('mobix_worker_url')||'';const PUBLIC_JSON='https://mobixquillon-oss.github.io/Calendario/Calendario_MOBIX.json';let syncKey='';let remoteReady=false;const HOLIDAYS={
+'2026-01-01':['Año Nuevo',1],'2026-04-03':['Viernes Santo',0],'2026-04-04':['Sábado Santo',0],
+'2026-05-01':['Día del Trabajo',1],'2026-05-21':['Glorias Navales',0],
+'2026-06-21':['Pueblos Indígenas',0],'2026-06-29':['San Pedro y San Pablo',0],
+'2026-07-16':['Virgen del Carmen',0],'2026-08-15':['Asunción de la Virgen',0],
+'2026-09-18':['Independencia Nacional',1],'2026-09-19':['Glorias del Ejército',1],
+'2026-10-12':['Encuentro de Dos Mundos',0],'2026-10-31':['Iglesias Evangélicas',0],
+'2026-11-01':['Todos los Santos',0],'2026-12-08':['Inmaculada Concepción',0],
+'2026-12-25':['Navidad',1],
+'2027-01-01':['Año Nuevo',1],'2027-03-26':['Viernes Santo',0],'2027-03-27':['Sábado Santo',0],
+'2027-05-01':['Día del Trabajo',1],'2027-05-21':['Glorias Navales',0],
+'2027-06-21':['Pueblos Indígenas',0],'2027-06-28':['San Pedro y San Pablo',0],
+'2027-07-16':['Virgen del Carmen',0],'2027-08-15':['Asunción de la Virgen',0],
+'2027-09-17':['Feriado Fiestas Patrias',0],'2027-09-18':['Independencia Nacional',1],
+'2027-09-19':['Glorias del Ejército',1],'2027-10-11':['Encuentro de Dos Mundos',0],
+'2027-10-31':['Iglesias Evangélicas',0],'2027-11-01':['Todos los Santos',0],
+'2027-12-08':['Inmaculada Concepción',0],'2027-12-25':['Navidad',1]
+};const $=id=>document.getElementById(id),pad=n=>String(n).padStart(2,'0'),date=d=>`${year}-${pad(month+1)}-${pad(d)}`;function render(){const c=$('calendar');c.replaceChildren();const monthTitle=new Intl.DateTimeFormat('es-CL',{month:'long',year:'numeric'}).format(new Date(year,month,1));$('title').textContent=monthTitle.charAt(0).toLocaleUpperCase('es-CL')+monthTitle.slice(1);for(const n of ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom']){const el=document.createElement('div');el.className='week';el.textContent=n;c.append(el)}for(let i=0;i<(new Date(year,month,1).getDay()+6)%7;i++){const el=document.createElement('div');el.className='day empty';c.append(el)}for(let d=1;d<=new Date(year,month+1,0).getDate();d++){const el=document.createElement('div');el.className='day';const holiday=HOLIDAYS[date(d)];if(holiday)el.classList.add('holiday');const num=document.createElement('strong');num.textContent=d;el.append(num);if(holiday){el.title='Feriado: '+holiday[0]}for(const [id,name,cls] of [['camilaF','Camila F','purple'],['yarisa','Yariza','pink'],['camila','Camila M','blue']])if(data[date(d)]?.[id]){const tag=document.createElement('span');tag.className='tag '+cls;tag.textContent=name;el.append(tag)}el.onclick=()=>{if(!admin)return;day=d;$('date').textContent=`Turnos: ${date(d)}`;$('yarisa').checked=!!data[date(d)]?.yarisa;$('camila').checked=!!data[date(d)]?.camila;$('camilaF').checked=!!data[date(d)]?.camilaF;$('modal').classList.add('open')};c.append(el)}updateAuth()}function updateAuth(){$('auth').textContent=admin?'Cerrar sesión':'Ingresar como administrador';$('mode').textContent=admin?'Modo administrador activo':'Solo lectura';$('import').disabled=!admin;$('saveCalendar').disabled=!admin;document.querySelectorAll('.day:not(.empty)').forEach(el=>el.style.cursor=admin?'pointer':'default')}
+$('auth').onclick=()=>{if(admin){admin=false;syncKey='';updateAuth();return}const entered=prompt('Contraseña de administrador:');if(entered===null)return;if(entered!==ADMIN_PASSWORD){alert('Contraseña incorrecta');return}admin=true;if(!SYNC_API){const endpoint=prompt('URL de Cloudflare Worker para guardar en GitHub (dejar vacío para configurar después):','');if(endpoint){try{const u=new URL(endpoint);if(u.protocol!=='https:')throw Error();SYNC_API=u.origin;localStorage.setItem('mobix_worker_url',SYNC_API)}catch{alert('La URL debe ser HTTPS');}}}if(SYNC_API){syncKey=prompt('Clave segura de publicación (distinta de 17-24):')||'';if(!syncKey){admin=false;alert('Se necesita la clave segura para guardar en línea');}}updateAuth()};
+$('prev').onclick=()=>{month--;if(month<0){month=11;year--}render()};$('next').onclick=()=>{month++;if(month>11){month=0;year++}render()};$('cancel').onclick=()=>$('modal').classList.remove('open');$('save').onclick=()=>{if(!admin)return;const v={yarisa:$('yarisa').checked,camila:$('camila').checked,camilaF:$('camilaF').checked};if(v.yarisa||v.camila||v.camilaF)data[date(day)]=v;else delete data[date(day)];try{localStorage.setItem(KEY,JSON.stringify(data));$('status').textContent='Cambio local pendiente de confirmación en GitHub'}catch{$('status').textContent='No se pudo guardar: exporta un respaldo'}$('modal').classList.remove('open');render();saveRemote()};$('saveCalendar').onclick=saveRemote;$('export').onclick=()=>{const blob=new Blob([JSON.stringify({app:'MOBIX calendario',data},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Calendario_MOBIX.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('import').onclick=()=>{if(!admin)return;$('file').click()};$('file').onchange=async e=>{if(!admin)return;try{const v=JSON.parse(await e.target.files[0].text());if(v.app!=='MOBIX calendario'||!v.data||Array.isArray(v.data)||typeof v.data!=='object')throw Error();if(!confirm('¿Reemplazar los turnos actuales?'))return;localStorage.setItem(KEY,JSON.stringify(v.data));data=v.data;render()}catch{alert('Respaldo no válido')}finally{e.target.value=''}};render();loadRemote();setInterval(()=>{if(!admin)loadRemote()},15000);
+async function loadRemote(){
+ try{
+  const res=await fetch(SYNC_API ? SYNC_API.replace(/\/$/,'')+'/calendar' : PUBLIC_JSON+'?t='+Date.now(),{cache:'no-store'});
+  if(!res.ok)throw Error('HTTP '+res.status);
+  const payload=await res.json();
+  const turns=payload && payload.data && typeof payload.data==='object' && !Array.isArray(payload.data) ? payload.data : payload;
+  if(!turns || typeof turns!=='object'||Array.isArray(turns))throw Error('JSON inválido');
+  data=turns;localStorage.setItem(KEY,JSON.stringify(data));remoteReady=true;render();
+  $('status').textContent='Turnos cargados desde Calendario_MOBIX.json';
+ }catch(e){$('status').textContent='Sin conexión: se muestran datos locales. '+e.message;}
+}
+async function saveRemote(){
+ if(!admin)return;
+ try{localStorage.setItem(KEY,JSON.stringify(data))}catch{}
+ if(!SYNC_API){$('status').textContent='NO guardado en GitHub. Configure el Worker para sincronizar.';return}
+ if(!syncKey){$('status').textContent='Falta clave segura de publicación';return}
+ $('status').textContent='Guardando en GitHub...';
+ try{
+  const res=await fetch(SYNC_API.replace(/\/$/,'')+'/calendar',{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'Bearer '+syncKey},body:JSON.stringify({app:'MOBIX calendario',data})});
+  const result=await res.json().catch(()=>({}));
+  if(!res.ok)throw Error(result.error||('HTTP '+res.status));
+  remoteReady=true;$('status').textContent='Guardado confirmado en GitHub: Calendario_MOBIX.json';
+ }catch(e){$('status').textContent='No se guardó en GitHub: '+e.message+'. Exporta un respaldo.'}
+}
+</script></html>
+<script>
+(function(){
+ const clock=document.getElementById('mobixCurrentTime');
+ const dateLabel=document.getElementById('mobixCurrentDate');
+ const formatter=new Intl.DateTimeFormat('es-CL',{timeZone:'America/Santiago',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'});
+ const dateFormatter=new Intl.DateTimeFormat('es-CL',{timeZone:'America/Santiago',day:'2-digit',month:'2-digit',year:'numeric'});
+ function updateClock(){const now=new Date();if(clock)clock.textContent=formatter.format(now);if(dateLabel)dateLabel.textContent=dateFormatter.format(now)}
+ updateClock();setInterval(updateClock,250);document.addEventListener('visibilitychange',updateClock);
+})();
+</script>
